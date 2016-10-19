@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 
 public interface OnClickActivityListener {
 
+    void setTitleToolbar(String title);
     void navigateTo(Fragment fragment);
     void navigateTo(Fragment fragment, boolean addToBackStack);
 }

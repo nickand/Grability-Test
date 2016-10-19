@@ -11,14 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.android.testgrability.R;
 import test.android.testgrability.fragments.AppsFragment;
 import test.android.testgrability.interfaces.OnClickActivityListener;
-import test.android.testgrability.utils.Utils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements OnClickActivityListener {
@@ -26,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements OnClickActivityLi
     private static final String CLASS_TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView titleToolbar;
     private Fragment mFragment;
 
     @Override
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnClickActivityLi
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        toolbar.setTitle("Test Grability");
+        setTitleToolbar("Test Grability");
         setSupportActionBar(toolbar);
 
         Fragment fragment = null;
@@ -63,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements OnClickActivityLi
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setTitleToolbar(String title) {
+        titleToolbar.setText(title);
     }
 
     @Override
@@ -99,18 +105,6 @@ public class MainActivity extends AppCompatActivity implements OnClickActivityLi
         }
 
         mFragment = fragment;
-    }
-
-    @Override
-    public void startActivityForResult(Intent data, int requestCode) {
-        super.startActivityForResult(data, requestCode);
-        if (requestCode == RESULT_OK) {
-            if (data != null) {
-                // lo vas a recibir aqui aqui llamas a los productos segun la categoria XX que sacas de data
-                data.getExtras();
-                Log.d(CLASS_TAG, data.getExtras().toString());
-            }
-        }
     }
 
     @Override

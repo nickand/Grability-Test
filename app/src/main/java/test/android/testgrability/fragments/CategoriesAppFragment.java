@@ -74,8 +74,7 @@ public class CategoriesAppFragment extends Fragment {
         if (getArguments() != null) {
             categoryId = getArguments().getString("category_id");
             categorySelected = getArguments().getString("name_category");
-            ((AppCompatActivity) getActivity())
-                    .getSupportActionBar().setTitle(categorySelected);
+
             getFreeApplications(categoryId);
         } else {
             categoryId = null;
@@ -94,6 +93,8 @@ public class CategoriesAppFragment extends Fragment {
 
         linearNoInternetMessage = (LinearLayout)
                 mView.findViewById(R.id.containerNoInternetMessage);
+
+        mListener.setTitleToolbar(categorySelected);
 
         FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package test.android.testgrability.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import test.android.testgrability.R;
+import test.android.testgrability.interfaces.OnClickActivityListener;
 import test.android.testgrability.models.Entry;
 
 /**
@@ -50,8 +52,6 @@ public class DetailFragment extends Fragment {
     TextView tvRights;
     @BindView(R.id.btnGoItunesStore)
     Button btnGoItunesStore;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.scrollViewContainer)
     ScrollView scrollViewContainer;
 
@@ -59,6 +59,7 @@ public class DetailFragment extends Fragment {
     private boolean isShowing = false;
 
     private Unbinder unbinder;
+    private OnClickActivityListener mListener;
 
     public DetailFragment() {
     }
@@ -95,8 +96,7 @@ public class DetailFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, mView);
 
-        ((AppCompatActivity) getActivity())
-                .getSupportActionBar().setTitle(mEntry.getName().getAppName());
+        mListener.setTitleToolbar(mEntry.getName().getAppName());
 
         tvDetailAppName.setText(mEntry.getName().getAppName());
         tvDetailDescription.setText(mEntry.getSummary().getDescriptionApp());
@@ -114,6 +114,23 @@ public class DetailFragment extends Fragment {
 
 
         return mView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnClickActivityListener) {
+            mListener = (OnClickActivityListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnClickActivityListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @Override

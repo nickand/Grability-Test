@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class CategoriesActivity extends AppCompatActivity implements OnClickActivityListener {
 
     private static final String CLASS_TAG = CategoriesActivity.class.getSimpleName();
+    @BindView(R.id.toolbar_title)
+    TextView titleToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private RecyclerView mReciclerView;
     private CategoriesListRecyclerViewAdapter mAdapter;
     private Fragment mFragment;
@@ -31,6 +36,9 @@ public class CategoriesActivity extends AppCompatActivity implements OnClickActi
         setContentView(R.layout.activity_categories);
         ButterKnife.bind(this);
 
+        setTitleToolbar("Categories");
+        setSupportActionBar(toolbar);
+
         Fragment fragment = null;
         fragment = CategoriesFragment.newInstance();
 
@@ -40,6 +48,11 @@ public class CategoriesActivity extends AppCompatActivity implements OnClickActi
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public void setTitleToolbar(String title) {
+        titleToolbar.setText(title);
     }
 
     @Override

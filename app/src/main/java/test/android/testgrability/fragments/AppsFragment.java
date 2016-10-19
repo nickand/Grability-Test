@@ -96,9 +96,8 @@ public class AppsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_apps, container, false);
-
-        ((AppCompatActivity) getActivity())
-                .getSupportActionBar().setTitle("Test Grability");
+//
+        mListener.setTitleToolbar("Test Grability");
 
         mContext = mView.getContext();
 
@@ -114,7 +113,7 @@ public class AppsFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), CategoriesActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(i, MainActivity.RESULT_OK);
+                startActivity(i);
             }
         });
 
