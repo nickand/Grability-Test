@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--All categories-->
     <string-array name="category_name">
         <item>All</item>
         <item>Books</item>
@@ -27,6 +28,7 @@
         <item>Weather</item>
     </string-array>
 
+    <!--ID's categories-->
     <integer-array name="category_id">
         <item>0</item>
         <item>6018</item>
