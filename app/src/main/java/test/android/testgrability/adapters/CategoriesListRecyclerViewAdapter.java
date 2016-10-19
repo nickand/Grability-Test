@@ -61,6 +61,7 @@ public class CategoriesListRecyclerViewAdapter extends
                 Log.d(CLASS_TAG, "Category: "+position+ " ID: "+holder.mItem.getId());
                 Bundle bundle = new Bundle();
                 bundle.putString("category_id", String.valueOf(holder.mItem.getId()));
+                bundle.putString("name_category", String.valueOf(holder.mItem.getTitle()));
                 mListener.navigateTo(CategoriesAppFragment.newInstance(bundle));
             }
         });

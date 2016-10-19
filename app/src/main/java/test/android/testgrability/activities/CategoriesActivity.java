@@ -1,31 +1,23 @@
 package test.android.testgrability.activities;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 
-import java.util.List;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import test.android.testgrability.R;
-import test.android.testgrability.adapters.AppsListRecyclerViewAdapter;
 import test.android.testgrability.adapters.CategoriesListRecyclerViewAdapter;
-import test.android.testgrability.fragments.AppsFragment;
-import test.android.testgrability.fragments.CategoriesAppFragment;
 import test.android.testgrability.fragments.CategoriesFragment;
 import test.android.testgrability.interfaces.OnClickActivityListener;
-import test.android.testgrability.models.Genre;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class CategoriesActivity extends AppCompatActivity implements OnClickActivityListener{
+public class CategoriesActivity extends AppCompatActivity implements OnClickActivityListener {
 
     private static final String CLASS_TAG = CategoriesActivity.class.getSimpleName();
     private RecyclerView mReciclerView;
@@ -37,8 +29,9 @@ public class CategoriesActivity extends AppCompatActivity implements OnClickActi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        ButterKnife.bind(this);
 
-        Fragment fragment =null;
+        Fragment fragment = null;
         fragment = CategoriesFragment.newInstance();
 
         navigateTo(fragment);
@@ -67,10 +60,10 @@ public class CategoriesActivity extends AppCompatActivity implements OnClickActi
 
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
 
-        if (mFragment == null){
-            fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
+        if (mFragment == null) {
+            fragmentTransaction.add(R.id.fragment_container, fragment).commit();
 
-        }else{
+        } else {
 
             fragmentTransaction.setCustomAnimations(
                     R.anim.enter_from_right, R.anim.exit_to_left,

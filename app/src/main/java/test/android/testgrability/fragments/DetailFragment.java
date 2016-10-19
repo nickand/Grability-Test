@@ -1,14 +1,16 @@
 package test.android.testgrability.fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -19,7 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import test.android.testgrability.R;
-import test.android.testgrability.activities.SplashActivity;
 import test.android.testgrability.models.Entry;
 
 /**
@@ -47,6 +48,12 @@ public class DetailFragment extends Fragment {
     TextView tvAppType;
     @BindView(R.id.tvRights)
     TextView tvRights;
+    @BindView(R.id.btnGoItunesStore)
+    Button btnGoItunesStore;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.scrollViewContainer)
+    ScrollView scrollViewContainer;
 
     private Entry mEntry;
     private boolean isShowing = false;
@@ -88,6 +95,9 @@ public class DetailFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, mView);
 
+        ((AppCompatActivity) getActivity())
+                .getSupportActionBar().setTitle(mEntry.getName().getAppName());
+
         tvDetailAppName.setText(mEntry.getName().getAppName());
         tvDetailDescription.setText(mEntry.getSummary().getDescriptionApp());
         tvCategory.setText(mEntry.getCategoryName().getAttributesApp().getLabel());
@@ -95,7 +105,7 @@ public class DetailFragment extends Fragment {
         if (mEntry.getPrice().getAttributesApp().getAmount().equals("0.00000"))
             tvDetailAppCost.setText("FREE");
 
-        tvDetailAppMadeBy.setText("By "+mEntry.getCompanyName().getLabel());
+        tvDetailAppMadeBy.setText("By " + mEntry.getCompanyName().getLabel());
         tvAppType.setText(mEntry.getContentType().getAttributesApp().getLabel());
         tvRights.setText(mEntry.getRightsName().getLabel());
 
@@ -117,9 +127,19 @@ public class DetailFragment extends Fragment {
         if (!isShowing) {
             isShowing = true;
             tvDetailDescription.setMaxLines(Integer.MAX_VALUE);
+            tvShowMore.setText(R.string.show_less);
         } else {
             isShowing = false;
             tvDetailDescription.setMaxLines(4);
+            tvShowMore.setText(R.string.read_more);
         }
+    }
+
+    @OnClick(R.id.btnGoItunesStore)
+    public void btnGoItunes() {
+        String url = mEntry.getAppLink().getAttributesApp().getHref();
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }

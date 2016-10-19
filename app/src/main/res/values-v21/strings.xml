@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="description_app">Description</string>
-    <string name="read_more">Read more</string>
+    <string name="read_more">Show more</string>
     <string name="app_category">Category</string>
     <string name="app_type">App</string>
     <string name="rights">© 2016 Apple Inc.</string>
     <string name="go_to_itunes_store">GO TO ITUNES STORE</string>
+    <string name="show_less">Show less</string>
 </resources>

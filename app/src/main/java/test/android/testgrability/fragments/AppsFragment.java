@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ import test.android.testgrability.models.AppImage;
 import test.android.testgrability.models.AppsApiResponse;
 import test.android.testgrability.models.Entry;
 import test.android.testgrability.services.ApiClient;
+import test.android.testgrability.utils.Utils;
 
 /**
  * Created by Nicolas on 13/10/2016.
@@ -69,6 +71,8 @@ public class AppsFragment extends Fragment {
     private List<Entry> mEntryList = new ArrayList<>();
     private List<AppImage> mImageList = new ArrayList<>();
     private OnClickActivityListener mListener;
+    private LinearLayout linearContainer;
+    private LinearLayout linearNoInternetMessage;
 
     public AppsFragment() {}
 
@@ -93,7 +97,16 @@ public class AppsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_apps, container, false);
 
+        ((AppCompatActivity) getActivity())
+                .getSupportActionBar().setTitle("Test Grability");
+
         mContext = mView.getContext();
+
+        linearContainer = (LinearLayout)
+                mView.findViewById(R.id.containerProgressIndicator);
+
+        linearNoInternetMessage = (LinearLayout)
+                mView.findViewById(R.id.containerNoInternetMessage);
 
         FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +131,15 @@ public class AppsFragment extends Fragment {
         mReciclerView.setAdapter(mAdapter);*/
 
         if (mEntryList.isEmpty()) {
-            getTopApps();
+            if (Utils.isNetworkConnected()) {
+                Log.d(CLASS_TAG, "Estoy conectado en internet");
+                linearContainer.setVisibility(View.VISIBLE);
+                getTopApps();
+            } else {
+                Log.d(CLASS_TAG, "No estoy conectado en internet");
+                linearContainer.setVisibility(View.GONE);
+                linearNoInternetMessage.setVisibility(View.VISIBLE);
+            }
         } else {
             mAdapter = new AppsListRecyclerViewAdapter(mEntryList, mListener);
             mReciclerView.setAdapter(mAdapter);
@@ -154,26 +175,23 @@ public class AppsFragment extends Fragment {
 
                 mEntryList = apiResponse.getFeed().getEntry();
 
-                Log.d(CLASS_TAG, "TOP APPS SUCCESS " +mEntryList);
+                if (response.isSuccessful()) {
+                    Log.d(CLASS_TAG, "TOP APPS SUCCESS " +mEntryList);
+                    linearContainer.setVisibility(View.GONE);
 
+                    for (int i = 0; i < mEntryList.size(); i++) {
+                        Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName()+" "+
+                                "Image: "+mEntryList.get(i).getAppImage().getIconApp());
+                    }
 
-//                for (Entry app : mEntryList) {
-//                    Log.d(CLASS_TAG, app.getName().getAppName()+" "+"Image: "+app.getImage());
-//                }
-
-                for (int i = 0; i < mEntryList.size(); i++) {
-                    Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName()+" "+
-                            "Image: "+mEntryList.get(i).getAppImage().getIconApp());
+                    mAdapter = new AppsListRecyclerViewAdapter(mEntryList, mListener);
+                    mReciclerView.setAdapter(mAdapter);
                 }
-
-                mAdapter = new AppsListRecyclerViewAdapter(mEntryList, mListener);
-                mReciclerView.setAdapter(mAdapter);
             }
 
             @Override
             public void onFailure(Call<AppsApiResponse> call, Throwable t) {
                 t.printStackTrace();
-
             }
         });
 

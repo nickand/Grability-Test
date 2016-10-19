@@ -21,9 +21,11 @@ public class Entry implements Parcelable {
     private String appAmount;
     private String appCompany;
     private String appName;
+    private String appLink;
     @SerializedName("im:name")
     private AppName name;
-    private String appIcon;
+    @SerializedName("link")
+    private AppLink linkApp;
     @SerializedName("im:image")
     private List<AppImage> appImage = new ArrayList<AppImage>();
     private String appDescription;
@@ -40,6 +42,14 @@ public class Entry implements Parcelable {
     private AppRights rightsName;
 
     public Entry() {
+    }
+
+    public AppLink getAppLink() {
+        return linkApp;
+    }
+
+    public void setAppLink(AppLink linkApp) {
+        this.linkApp = linkApp;
     }
 
     public AppRights getRightsName() {
@@ -139,6 +149,8 @@ public class Entry implements Parcelable {
         appType = in.readString();
         appRights = rightsName.getLabel();
         appRights = in.readString();
+        appLink = linkApp.getAttributesApp().getHref();
+        appLink = in.readString();
         in.readTypedList(appImage, AppImage.CREATOR);
 
 
@@ -153,6 +165,7 @@ public class Entry implements Parcelable {
         parcel.writeString(appCategory);
         parcel.writeString(appType);
         parcel.writeString(appRights);
+        parcel.writeString(appLink);
         parcel.writeTypedList(appImage);
     }
 }

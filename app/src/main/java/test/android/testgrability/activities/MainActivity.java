@@ -6,34 +6,39 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import test.android.testgrability.R;
 import test.android.testgrability.fragments.AppsFragment;
 import test.android.testgrability.interfaces.OnClickActivityListener;
+import test.android.testgrability.utils.Utils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements OnClickActivityListener {
 
     private static final String CLASS_TAG = MainActivity.class.getSimpleName();
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Test Grability");
         setSupportActionBar(toolbar);
 
         Fragment fragment = null;
         fragment = AppsFragment.newInstance();
-
 
         navigateTo(fragment);
     }
@@ -78,10 +83,10 @@ public class MainActivity extends AppCompatActivity implements OnClickActivityLi
 
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
 
-        if (mFragment == null){
+        if (mFragment == null) {
             fragmentTransaction.add(R.id.fragment_container, fragment).commit();
 
-        }else{
+        } else {
 
             fragmentTransaction.setCustomAnimations(
                     R.anim.enter_from_right, R.anim.exit_to_left,
