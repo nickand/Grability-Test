@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_name">
+        <item>All</item>
+        <item>Books</item>
+        <item>Business</item>
+        <item>Catalogs</item>
+        <item>Education</item>
+        <item>Entertainment</item>
+        <item>Finance</item>
+        <item>Food &amp; Drink</item>
+        <item>Games</item>
+        <item>Health &amp; Fitness</item>
+        <item>Lifestyle</item>
+        <item>Medical</item>
+        <item>Music</item>
+        <item>Navigation</item>
+        <item>News</item>
+        <item>Newsstand</item>
+        <item>Photo &amp; Video</item>
+        <item>Productivity</item>
+        <item>Reference</item>
+        <item>Social Networking</item>
+        <item>Sports</item>
+        <item>Travel</item>
+        <item>Utilities</item>
+        <item>Weather</item>
+    </string-array>
+
+    <integer-array name="category_id">
+        <item>0</item>
+        <item>6018</item>
+        <item>6000</item>
+        <item>6022</item>
+        <item>6017</item>
+        <item>6016</item>
+        <item>6015</item>
+        <item>6023</item>
+        <item>6014</item>
+        <item>6013</item>
+        <item>6012</item>
+        <item>6020</item>
+        <item>6011</item>
+        <item>6010</item>
+        <item>6009</item>
+        <item>6021</item>
+        <item>6008</item>
+        <item>6007</item>
+        <item>6006</item>
+        <item>6005</item>
+        <item>6004</item>
+        <item>6003</item>
+        <item>6002</item>
+        <item>6001</item>
+    </integer-array>
+</resources>

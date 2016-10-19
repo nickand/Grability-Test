@@ -1,0 +1,123 @@
+package test.android.testgrability.adapters;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
+
+import java.util.List;
+
+import test.android.testgrability.R;
+import test.android.testgrability.fragments.DetailFragment;
+import test.android.testgrability.interfaces.OnClickActivityListener;
+import test.android.testgrability.models.Entry;
+
+public class AppsListRecyclerViewAdapter extends RecyclerView.Adapter<AppsListRecyclerViewAdapter.ViewHolder> {
+
+    private final List<Entry> mValues;
+    private OnClickActivityListener mListener;
+    private Context mContext;
+    private TypedArray mImgs;
+
+    public AppsListRecyclerViewAdapter(List<Entry> items, OnClickActivityListener listener) {
+        mValues = items;
+        mListener = listener;
+    }
+
+    public AppsListRecyclerViewAdapter(List<Entry> items) {
+        mValues = items;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.apps_item_list, parent, false);
+        mContext = parent.getContext();
+        return new ViewHolder(view);
+    }
+
+    @SuppressWarnings("ResourceType")
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.mItem = mValues.get(position);
+
+        holder.mAppName.setText(holder.mItem.getName().getAppName());
+        holder.mAppCompany.setText(holder.mItem.getCompanyName().getLabel());
+        if (holder.mItem.getPrice().getAttributesApp().getAmount().equals("0.00000"))
+            holder.mAppAmount.setText("FREE");
+        holder.mAppCategory.setText(holder.mItem.getCategoryName().getAttributesApp().getLabel());
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+
+        //pre fetching image tree
+        Uri uri = Uri.parse(holder.mItem.getAppImage().getIconApp());
+        ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(uri).build();
+        imagePipeline.prefetchToDiskCache(imageRequest, null);
+
+        holder.mAppImage.setImageURI(uri);
+
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (null != mListener) {
+                    mListener.navigateTo(DetailFragment.newInstance(holder.mItem));
+                }
+
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return mValues.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        public final TextView mAppName;
+        public final TextView mAppCompany;
+        public final TextView mAppAmount;
+        public final TextView mAppCategory;
+        public final SimpleDraweeView mAppImage;
+
+        public Entry mItem;
+
+        public ViewHolder(View view) {
+            super(view);
+            mView = view;
+            mAppName = (TextView) view.findViewById(R.id.tvAppName);
+            mAppCompany = (TextView) view.findViewById(R.id.tvCompanyName);
+            mAppAmount = (TextView) view.findViewById(R.id.tvPriceName);
+            mAppCategory = (TextView) view.findViewById(R.id.tvTypeName);
+            mAppImage = (SimpleDraweeView) view.findViewById(R.id.app_image);
+
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + mAppName.getText() + "'";
+        }
+    }
+}
