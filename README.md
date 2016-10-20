@@ -22,9 +22,13 @@ compile 'com.jakewharton:butterknife:8.4.0'
 # Libraries connection http
 
 compile 'com.squareup.retrofit2:retrofit:2.1.0'
+
 compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
 compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+
 compile 'com.google.code.gson:gson:2.5'
+
 compile 'com.squareup.okhttp3:okhttp:3.3.1'
 
 # Libraries for loading images
