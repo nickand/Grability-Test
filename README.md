@@ -38,3 +38,6 @@ compile 'com.facebook.fresco:fresco:0.13.0'
 # Libraries for progress indicator
 
 compile 'com.crystal:crystalpreloaders:1.0.0'
+
+
+Elaborado por Nicolás González
