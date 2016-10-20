@@ -15,7 +15,7 @@ compile 'com.android.support:recyclerview-v7:24.2.1'
 
 compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 
-Libraries injection view
+# Libraries injection view
 
 compile 'com.jakewharton:butterknife:8.4.0'
 
