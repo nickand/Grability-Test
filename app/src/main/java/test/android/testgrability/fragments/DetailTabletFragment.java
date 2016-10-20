@@ -52,6 +52,8 @@ public class DetailTabletFragment extends Fragment {
     Button btnGoItunesStore;
     @BindView(R.id.scrollViewContainer)
     ScrollView scrollViewContainer;
+    @BindView(R.id.tvTitleDescription)
+    TextView tvTitleDescription;
 
     private Entry mEntry;
     private boolean isShowing = false;
@@ -97,6 +99,7 @@ public class DetailTabletFragment extends Fragment {
         mListener.setTitleToolbar(mEntry.getName().getAppName());
 
         btnGoItunesStore.setVisibility(View.VISIBLE);
+        tvTitleDescription.setVisibility(View.VISIBLE);
 
         tvDetailAppName.setText(mEntry.getName().getAppName());
         tvDetailDescription.setText(mEntry.getSummary().getDescriptionApp());

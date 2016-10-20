@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +52,8 @@ public class DetailFragment extends Fragment {
     Button btnGoItunesStore;
     @BindView(R.id.scrollViewContainer)
     ScrollView scrollViewContainer;
+    @BindView(R.id.tvTitleDescription)
+    TextView tvTitleDescription;
 
     private Entry mEntry;
     private boolean isShowing = false;
@@ -100,6 +100,7 @@ public class DetailFragment extends Fragment {
 
         btnGoItunesStore.setVisibility(View.VISIBLE);
         tvShowMore.setVisibility(View.VISIBLE);
+        tvTitleDescription.setVisibility(View.VISIBLE);
 
         tvDetailAppName.setText(mEntry.getName().getAppName());
         tvDetailDescription.setText(mEntry.getSummary().getDescriptionApp());
