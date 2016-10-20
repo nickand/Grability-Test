@@ -72,7 +72,7 @@ public class CategoriesListRecyclerViewAdapter extends
                     mListener.navigateTo(CategoriesTabletAppFragment.newInstance(bundle));
                 } else {
                     // do something else
-                    Log.d(CLASS_TAG, "Category: "+position+ " ID: "+holder.mItem.getId());
+                    Log.d(CLASS_TAG, "Category: " + position + " ID: " + holder.mItem.getId());
                     Bundle bundle = new Bundle();
                     bundle.putString("category_id", String.valueOf(holder.mItem.getId()));
                     bundle.putString("name_category", String.valueOf(holder.mItem.getTitle()));
@@ -92,7 +92,7 @@ public class CategoriesListRecyclerViewAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mCategoryName;
-//        public final TextView mCauseDate;
+        //        public final TextView mCauseDate;
         public final SimpleDraweeView mAppImage;
 //        public final View mCategoryBackground;
 

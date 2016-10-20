@@ -54,7 +54,8 @@ public class CategoriesAppFragment extends Fragment {
     private String categoryId;
     private String categorySelected;
 
-    public CategoriesAppFragment() {}
+    public CategoriesAppFragment() {
+    }
 
     public static CategoriesAppFragment newInstance() {
         CategoriesAppFragment fragment = new CategoriesAppFragment();
@@ -167,7 +168,7 @@ public class CategoriesAppFragment extends Fragment {
         mListener = null;
     }
 
-    private void getFreeApplications(String id){
+    private void getFreeApplications(String id) {
         ApiClient.ApiInterface apiService = ApiClient.getApiClient().create(ApiClient.ApiInterface.class);
         Call<AppsApiResponse> call = apiService.getFreeApplications(id);
         call.enqueue(new Callback<AppsApiResponse>() {
@@ -178,11 +179,11 @@ public class CategoriesAppFragment extends Fragment {
                 if (response.isSuccessful()) {
                     mEntryList = apiResponse.getFeed().getEntry();
                     linearContainer.setVisibility(View.GONE);
-                    Log.d(CLASS_TAG, "TOP APPS SUCCESS " +mEntryList);
+                    Log.d(CLASS_TAG, "TOP APPS SUCCESS " + mEntryList);
 
                     for (int i = 0; i < mEntryList.size(); i++) {
-                        Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName()+" "+
-                                "Image: "+mEntryList.get(i).getAppImage().getIconApp());
+                        Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName() + " " +
+                                "Image: " + mEntryList.get(i).getAppImage().getIconApp());
                     }
 
                     mAdapter = new AppsListRecyclerViewAdapter(mEntryList, mListener);

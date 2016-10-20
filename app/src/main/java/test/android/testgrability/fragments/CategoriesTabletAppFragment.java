@@ -46,16 +46,15 @@ public class CategoriesTabletAppFragment extends Fragment {
     private AppsCategoriesTabletListRecyclerViewAdapter mAdapter;
     private Context mContext;
     private List<Entry> mEntryList = new ArrayList<>();
-    private List<AppImage> mImageList = new ArrayList<>();
     private OnClickActivityListener mListener;
-    private LinearLayout linearContainer;
     private LinearLayout linearNoInternetMessage;
 
     private String categoryId;
     private String categorySelected;
     private CrystalPreloader circleProgress;
 
-    public CategoriesTabletAppFragment() {}
+    public CategoriesTabletAppFragment() {
+    }
 
     public static CategoriesTabletAppFragment newInstance() {
         CategoriesTabletAppFragment fragment = new CategoriesTabletAppFragment();
@@ -115,8 +114,6 @@ public class CategoriesTabletAppFragment extends Fragment {
 
         // allows for optimizations if all item views are of the same size:
         mReciclerView.setHasFixedSize(true);
-        /*mAdapter = new AppsListRecyclerViewAdapter(mEntryList, mListener);
-        mReciclerView.setAdapter(mAdapter);*/
 
         if (mEntryList.isEmpty()) {
 
@@ -167,7 +164,7 @@ public class CategoriesTabletAppFragment extends Fragment {
         mListener = null;
     }
 
-    private void getFreeApplications(String id){
+    private void getFreeApplications(String id) {
         ApiClient.ApiInterface apiService = ApiClient.getApiClient().create(ApiClient.ApiInterface.class);
         Call<AppsApiResponse> call = apiService.getFreeApplications(id);
         call.enqueue(new Callback<AppsApiResponse>() {
@@ -178,11 +175,11 @@ public class CategoriesTabletAppFragment extends Fragment {
                 if (response.isSuccessful()) {
                     mEntryList = apiResponse.getFeed().getEntry();
                     circleProgress.setVisibility(View.GONE);
-                    Log.d(CLASS_TAG, "TOP APPS SUCCESS " +mEntryList);
+                    Log.d(CLASS_TAG, "TOP APPS SUCCESS " + mEntryList);
 
                     for (int i = 0; i < mEntryList.size(); i++) {
-                        Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName()+" "+
-                                "Image: "+mEntryList.get(i).getAppImage().getIconApp());
+                        Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName() + " " +
+                                "Image: " + mEntryList.get(i).getAppImage().getIconApp());
                     }
 
                     mAdapter = new AppsCategoriesTabletListRecyclerViewAdapter(mEntryList, mListener);

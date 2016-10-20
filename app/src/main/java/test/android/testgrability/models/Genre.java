@@ -55,7 +55,7 @@ public class Genre {
 
         for (int i = 0; i < names.length; i++) {
             list.add(new Genre(names[i], ids[i]));
-            Log.d(TAG, "ID: "+list.get(i).getId() +" Categories: " + list.get(i).getTitle());
+            Log.d(TAG, "ID: " + list.get(i).getId() + " Categories: " + list.get(i).getTitle());
         }
 
         return list;

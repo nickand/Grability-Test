@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Nicolas on 13/10/2016.
  */
-public class AppImage implements Parcelable{
+public class AppImage implements Parcelable {
     @SerializedName("label")
     private String iconApp;
     private Attributes attributes;

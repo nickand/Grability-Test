@@ -38,7 +38,8 @@ public class CategoriesTabletFragment extends Fragment {
     private String categoryId;
     private List<Genre> mGenreList = new ArrayList<>();
 
-    public CategoriesTabletFragment() {}
+    public CategoriesTabletFragment() {
+    }
 
     public static CategoriesTabletFragment newInstance() {
         CategoriesTabletFragment fragment = new CategoriesTabletFragment();
@@ -74,8 +75,6 @@ public class CategoriesTabletFragment extends Fragment {
 
         // allows for optimizations if all item views are of the same size:
         mReciclerView.setHasFixedSize(true);
-        /*mAdapter = new AppsListRecyclerViewAdapter(mEntryList, mListener);
-        mReciclerView.setAdapter(mAdapter);*/
 
         if (Genre.getCategories(getActivity()).isEmpty()) {
 

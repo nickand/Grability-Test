@@ -2,6 +2,7 @@ package test.android.testgrability.utils;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import test.android.testgrability.R;
@@ -22,7 +23,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
-//        FlowManager.init(new FlowConfig.Builder(this).build());
+
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/CircularStd-Bold.otf")
                 .setFontAttrId(R.attr.fontPath)

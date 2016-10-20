@@ -82,7 +82,7 @@ public class AppsCategoriesTabletListRecyclerViewAdapter extends RecyclerView.Ad
                         arguments.putParcelable("parcel_data", holder.mItem);
                         DetailTabletFragment fragment = new DetailTabletFragment();
                         fragment.setArguments(arguments);
-                        ((CategoriesActivity)mContext).getSupportFragmentManager().beginTransaction()
+                        ((CategoriesActivity) mContext).getSupportFragmentManager().beginTransaction()
                                 .add(R.id.item_detail_container, fragment)
                                 .commit();
                     } else {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:crs_pl_style="ball_scale"
-            app:crs_pl_size="small"/>
+            app:crs_pl_size="small"
+            app:crs_pl_style="ball_scale" />
 
     </LinearLayout>
 
@@ -34,14 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_tyran_img"/>
+            android:src="@mipmap/ic_tyran_img" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="22sp"
-            android:text="@string/you_are_offline"/>
+            android:text="@string/you_are_offline"
+            android:textSize="22sp" />
 
     </LinearLayout>
 
@@ -49,15 +48,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"
-            android:paddingLeft="10dp"
-            tools:listitem="@layout/apps_item_list"
             android:background="@color/white"
-            tools:context=".activities.MainActivity"/>
+            android:paddingLeft="10dp"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".activities.MainActivity"
+            tools:listitem="@layout/apps_item_list" />
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -67,6 +67,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_view_list_white_24dp"
-        app:backgroundTint="@color/blue"/>
+        app:backgroundTint="@color/blue" />
 
 </android.support.design.widget.CoordinatorLayout>

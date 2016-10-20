@@ -99,7 +99,10 @@ public class Entry implements Parcelable {
     public List<AppImage> getImageList() {
         return appImage;
     }
-    public AppImage getAppImage() {return appImage.get(appImage.size() - 1);}
+
+    public AppImage getAppImage() {
+        return appImage.get(appImage.size() - 1);
+    }
 
     public void setImImage(List<AppImage> appImage) {
         this.appImage = appImage;

@@ -50,7 +50,8 @@ public class AppsTabletFragment extends Fragment {
     private LinearLayout linearNoInternetMessage;
     private CrystalPreloader circleProgress;
 
-    public AppsTabletFragment() {}
+    public AppsTabletFragment() {
+    }
 
     public static AppsTabletFragment newInstance() {
         AppsTabletFragment fragment = new AppsTabletFragment();
@@ -140,7 +141,7 @@ public class AppsTabletFragment extends Fragment {
         mListener = null;
     }
 
-    private void getTopApps(){
+    private void getTopApps() {
         ApiClient.ApiInterface apiService = ApiClient.getApiClient().create(ApiClient.ApiInterface.class);
         Call<AppsApiResponse> call = apiService.getTopApps();
         call.enqueue(new Callback<AppsApiResponse>() {
@@ -151,12 +152,12 @@ public class AppsTabletFragment extends Fragment {
                 mEntryList = apiResponse.getFeed().getEntry();
 
                 if (response.isSuccessful()) {
-                    Log.d(CLASS_TAG, "TOP APPS SUCCESS " +mEntryList);
+                    Log.d(CLASS_TAG, "TOP APPS SUCCESS " + mEntryList);
                     circleProgress.setVisibility(View.GONE);
 
                     for (int i = 0; i < mEntryList.size(); i++) {
-                        Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName()+" "+
-                                "Image: "+mEntryList.get(i).getAppImage().getIconApp());
+                        Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName() + " " +
+                                "Image: " + mEntryList.get(i).getAppImage().getIconApp());
                     }
 
                     mAdapter = new AppsListRecyclerViewAdapter(mEntryList, mListener);
