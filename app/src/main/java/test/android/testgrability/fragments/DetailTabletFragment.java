@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +26,10 @@ import test.android.testgrability.models.Entry;
 /**
  * Created by Nicolas on 13/10/2016.
  */
-public class DetailFragment extends Fragment {
+public class DetailTabletFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
-    private static final String CLASS_TAG = DetailFragment.class.getSimpleName();
+    private static final String CLASS_TAG = DetailTabletFragment.class.getSimpleName();
     @BindView(R.id.ivDetailIconApp)
     SimpleDraweeView ivDetailIconApp;
     @BindView(R.id.tvDetailAppName)
@@ -61,16 +59,16 @@ public class DetailFragment extends Fragment {
     private Unbinder unbinder;
     private OnClickActivityListener mListener;
 
-    public DetailFragment() {
+    public DetailTabletFragment() {
     }
 
-    public static DetailFragment newInstance() {
-        DetailFragment fragment = new DetailFragment();
+    public static DetailTabletFragment newInstance() {
+        DetailTabletFragment fragment = new DetailTabletFragment();
         return fragment;
     }
 
-    public static DetailFragment newInstance(Entry e) {
-        DetailFragment fragment = new DetailFragment();
+    public static DetailTabletFragment newInstance(Entry e) {
+        DetailTabletFragment fragment = new DetailTabletFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_PARAM1, e);
         fragment.setArguments(args);
@@ -83,7 +81,7 @@ public class DetailFragment extends Fragment {
         if (getArguments() != null) {
             Log.d(CLASS_TAG, " getting args");
 
-            mEntry = getArguments().getParcelable(ARG_PARAM1);
+            mEntry = getArguments().getParcelable("parcel_data");
             Log.d(CLASS_TAG, mEntry.getName().getAppName());
         }
     }
@@ -92,14 +90,13 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View mView = inflater.inflate(R.layout.fragment_detail_app, container, false);
+        View mView = inflater.inflate(R.layout.activity_detail_item_app, container, false);
 
         unbinder = ButterKnife.bind(this, mView);
 
         mListener.setTitleToolbar(mEntry.getName().getAppName());
 
         btnGoItunesStore.setVisibility(View.VISIBLE);
-        tvShowMore.setVisibility(View.VISIBLE);
 
         tvDetailAppName.setText(mEntry.getName().getAppName());
         tvDetailDescription.setText(mEntry.getSummary().getDescriptionApp());

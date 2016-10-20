@@ -58,21 +58,6 @@ public class DetailAppRecyclerViewAdapter extends RecyclerView.Adapter<DetailApp
         final Uri uri = Uri.parse(holder.mItem.getAppImage().getIconApp());
         holder.mAppImage.setImageURI(uri);
 
-//        holder.mView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (null != mListener) {
-//
-//                    mListener.navigateTo(DetailFragment.newInstance(holder.mItem));
-//                    Toast.makeText(mContext, "Item "+position, Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//            }
-//        });
-
-
     }
 
     @Override

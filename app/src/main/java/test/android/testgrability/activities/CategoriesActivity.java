@@ -14,7 +14,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.android.testgrability.R;
 import test.android.testgrability.adapters.CategoriesListRecyclerViewAdapter;
+import test.android.testgrability.fragments.AppsFragment;
+import test.android.testgrability.fragments.AppsTabletFragment;
 import test.android.testgrability.fragments.CategoriesFragment;
+import test.android.testgrability.fragments.CategoriesTabletFragment;
 import test.android.testgrability.interfaces.OnClickActivityListener;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -39,10 +42,18 @@ public class CategoriesActivity extends AppCompatActivity implements OnClickActi
         setTitleToolbar("Categories");
         setSupportActionBar(toolbar);
 
-        Fragment fragment = null;
-        fragment = CategoriesFragment.newInstance();
-
-        navigateTo(fragment);
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+            // do something
+            Fragment fragment = null;
+            fragment = CategoriesTabletFragment.newInstance();
+            navigateTo(fragment);
+        } else {
+            // do something else
+            Fragment fragment = null;
+            fragment = CategoriesFragment.newInstance();
+            navigateTo(fragment);
+        }
     }
 
     @Override

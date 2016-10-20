@@ -1,54 +1,29 @@
 package test.android.testgrability.fragments;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipeline;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.crystal.crystalpreloaders.widgets.CrystalPreloader;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Callable;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import test.android.testgrability.R;
 import test.android.testgrability.activities.CategoriesActivity;
-import test.android.testgrability.activities.MainActivity;
 import test.android.testgrability.adapters.AppsListRecyclerViewAdapter;
 import test.android.testgrability.interfaces.OnClickActivityListener;
 import test.android.testgrability.models.AppImage;
@@ -60,9 +35,9 @@ import test.android.testgrability.utils.Utils;
 /**
  * Created by Nicolas on 13/10/2016.
  */
-public class AppsFragment extends Fragment {
+public class AppsTabletFragment extends Fragment {
 
-    public static final String CLASS_TAG = AppsFragment.class.getSimpleName();
+    public static final String CLASS_TAG = AppsTabletFragment.class.getSimpleName();
     public static final String PARCEL_KEY = "parcel_key";
     private static final String PACKAGE = "test.android.testgrability";
     private RecyclerView mReciclerView;
@@ -73,16 +48,17 @@ public class AppsFragment extends Fragment {
     private OnClickActivityListener mListener;
     private LinearLayout linearContainer;
     private LinearLayout linearNoInternetMessage;
+    private CrystalPreloader circleProgress;
 
-    public AppsFragment() {}
+    public AppsTabletFragment() {}
 
-    public static AppsFragment newInstance() {
-        AppsFragment fragment = new AppsFragment();
+    public static AppsTabletFragment newInstance() {
+        AppsTabletFragment fragment = new AppsTabletFragment();
         return fragment;
     }
 
-    public static AppsFragment newInstance(Bundle args) {
-        AppsFragment fragment = new AppsFragment();
+    public static AppsTabletFragment newInstance(Bundle args) {
+        AppsTabletFragment fragment = new AppsTabletFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -95,17 +71,11 @@ public class AppsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.fragment_apps, container, false);
+        View mView = inflater.inflate(R.layout.activity_app_item_list, container, false);
 
         mListener.setTitleToolbar("Test Grability");
 
         mContext = mView.getContext();
-
-        linearContainer = (LinearLayout)
-                mView.findViewById(R.id.containerProgressIndicator);
-
-        linearNoInternetMessage = (LinearLayout)
-                mView.findViewById(R.id.containerNoInternetMessage);
 
         FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +87,13 @@ public class AppsFragment extends Fragment {
             }
         });
 
-        mReciclerView = (RecyclerView) mView.findViewById(R.id.list);
+        circleProgress = (CrystalPreloader) mView.findViewById(R.id.loader);
+
+        linearNoInternetMessage = (LinearLayout)
+                mView.findViewById(R.id.containerNoInternetMessage);
+
+
+        mReciclerView = (RecyclerView) mView.findViewById(R.id.item_list);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mReciclerView.setLayoutManager(layoutManager);
@@ -132,11 +108,11 @@ public class AppsFragment extends Fragment {
         if (mEntryList.isEmpty()) {
             if (Utils.isNetworkConnected()) {
                 Log.d(CLASS_TAG, "Estoy conectado en internet");
-                linearContainer.setVisibility(View.VISIBLE);
+                circleProgress.setVisibility(View.VISIBLE);
                 getTopApps();
             } else {
                 Log.d(CLASS_TAG, "No estoy conectado en internet");
-                linearContainer.setVisibility(View.GONE);
+                circleProgress.setVisibility(View.GONE);
                 linearNoInternetMessage.setVisibility(View.VISIBLE);
             }
         } else {
@@ -176,7 +152,7 @@ public class AppsFragment extends Fragment {
 
                 if (response.isSuccessful()) {
                     Log.d(CLASS_TAG, "TOP APPS SUCCESS " +mEntryList);
-                    linearContainer.setVisibility(View.GONE);
+                    circleProgress.setVisibility(View.GONE);
 
                     for (int i = 0; i < mEntryList.size(); i++) {
                         Log.d(CLASS_TAG, mEntryList.get(i).getName().getAppName()+" "+

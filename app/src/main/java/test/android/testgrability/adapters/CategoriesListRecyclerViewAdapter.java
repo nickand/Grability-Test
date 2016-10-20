@@ -16,8 +16,12 @@ import java.util.List;
 
 import test.android.testgrability.R;
 import test.android.testgrability.activities.CategoriesActivity;
+import test.android.testgrability.activities.MainActivity;
 import test.android.testgrability.fragments.AppsFragment;
 import test.android.testgrability.fragments.CategoriesAppFragment;
+import test.android.testgrability.fragments.CategoriesTabletAppFragment;
+import test.android.testgrability.fragments.DetailFragment;
+import test.android.testgrability.fragments.DetailTabletFragment;
 import test.android.testgrability.interfaces.OnClickActivityListener;
 import test.android.testgrability.models.Genre;
 
@@ -58,11 +62,24 @@ public class CategoriesListRecyclerViewAdapter extends
             @Override
             public void onClick(View v) {
 
-                Log.d(CLASS_TAG, "Category: "+position+ " ID: "+holder.mItem.getId());
-                Bundle bundle = new Bundle();
-                bundle.putString("category_id", String.valueOf(holder.mItem.getId()));
-                bundle.putString("name_category", String.valueOf(holder.mItem.getTitle()));
-                mListener.navigateTo(CategoriesAppFragment.newInstance(bundle));
+                boolean tabletSize = mContext.getResources().getBoolean(R.bool.isTablet);
+                if (tabletSize) {
+                    // do something
+                    Bundle arguments = new Bundle();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("category_id", String.valueOf(holder.mItem.getId()));
+                    bundle.putString("name_category", String.valueOf(holder.mItem.getTitle()));
+                    mListener.navigateTo(CategoriesTabletAppFragment.newInstance(bundle));
+                } else {
+                    // do something else
+                    Log.d(CLASS_TAG, "Category: "+position+ " ID: "+holder.mItem.getId());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("category_id", String.valueOf(holder.mItem.getId()));
+                    bundle.putString("name_category", String.valueOf(holder.mItem.getTitle()));
+                    mListener.navigateTo(CategoriesAppFragment.newInstance(bundle));
+                }
+
+
             }
         });
     }

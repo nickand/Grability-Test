@@ -1,24 +1,15 @@
 package test.android.testgrability.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
@@ -28,27 +19,26 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import java.util.List;
 
 import test.android.testgrability.R;
+import test.android.testgrability.activities.CategoriesActivity;
 import test.android.testgrability.activities.MainActivity;
-import test.android.testgrability.fragments.AppsFragment;
-import test.android.testgrability.fragments.AppsTabletFragment;
 import test.android.testgrability.fragments.DetailFragment;
 import test.android.testgrability.fragments.DetailTabletFragment;
 import test.android.testgrability.interfaces.OnClickActivityListener;
 import test.android.testgrability.models.Entry;
 
-public class AppsListRecyclerViewAdapter extends RecyclerView.Adapter<AppsListRecyclerViewAdapter.ViewHolder> {
+public class AppsCategoriesTabletListRecyclerViewAdapter extends RecyclerView.Adapter<AppsCategoriesTabletListRecyclerViewAdapter.ViewHolder> {
 
     private final List<Entry> mValues;
     private OnClickActivityListener mListener;
     private Context mContext;
     private TypedArray mImgs;
 
-    public AppsListRecyclerViewAdapter(List<Entry> items, OnClickActivityListener listener) {
+    public AppsCategoriesTabletListRecyclerViewAdapter(List<Entry> items, OnClickActivityListener listener) {
         mValues = items;
         mListener = listener;
     }
 
-    public AppsListRecyclerViewAdapter(List<Entry> items) {
+    public AppsCategoriesTabletListRecyclerViewAdapter(List<Entry> items) {
         mValues = items;
     }
 
@@ -92,7 +82,7 @@ public class AppsListRecyclerViewAdapter extends RecyclerView.Adapter<AppsListRe
                         arguments.putParcelable("parcel_data", holder.mItem);
                         DetailTabletFragment fragment = new DetailTabletFragment();
                         fragment.setArguments(arguments);
-                        ((MainActivity)mContext).getSupportFragmentManager().beginTransaction()
+                        ((CategoriesActivity)mContext).getSupportFragmentManager().beginTransaction()
                                 .add(R.id.item_detail_container, fragment)
                                 .commit();
                     } else {

@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,17 +17,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.android.testgrability.R;
 import test.android.testgrability.fragments.AppsFragment;
+import test.android.testgrability.fragments.AppsTabletFragment;
 import test.android.testgrability.interfaces.OnClickActivityListener;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements OnClickActivityListener {
 
     private static final String CLASS_TAG = MainActivity.class.getSimpleName();
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.toolbar_title)
     TextView titleToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private Fragment mFragment;
+
+    // ¿Hay dos paneles?
+    private boolean dosPaneles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +42,20 @@ public class MainActivity extends AppCompatActivity implements OnClickActivityLi
         setTitleToolbar("Test Grability");
         setSupportActionBar(toolbar);
 
-        Fragment fragment = null;
-        fragment = AppsFragment.newInstance();
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+            // do something
+            Fragment fragment = null;
+            fragment = AppsTabletFragment.newInstance();
+            navigateTo(fragment);
+        } else {
+            // do something else
+            Fragment fragment = null;
+            fragment = AppsFragment.newInstance();
+            navigateTo(fragment);
+        }
 
-        navigateTo(fragment);
+
     }
 
     @Override
