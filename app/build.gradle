@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'com.android.databinding'
 
 android {
     compileSdkVersion 24
     buildToolsVersion '24.0.3'
 
     defaultConfig {
-        applicationId "test.android.testgrability"
+        applicationId "test.android.testmerlin"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -39,4 +40,12 @@ dependencies {
     compile 'com.crystal:crystalpreloaders:1.0.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.flaviofaria:kenburnsview:1.0.7'
+    compile 'com.github.pwittchen:reactivenetwork-rx2:0.12.1'
+
+    compile('com.androidadvance:topsnackbar:1.1.1') {
+        exclude group: 'com.android.support'
+    }
+
+    compile 'com.thefinestartist:finestwebview:1.2.7'
 }

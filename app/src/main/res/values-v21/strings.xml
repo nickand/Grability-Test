@@ -4,7 +4,9 @@
     <string name="read_more">Show more</string>
     <string name="app_category">Category</string>
     <string name="app_type">App</string>
-    <string name="rights">© 2016 Apple Inc.</string>
-    <string name="go_to_itunes_store">GO TO ITUNES STORE</string>
+    <string name="rights">© Merlin</string>
+    <string name="go_to_web">VISIT PAGE</string>
     <string name="show_less">Show less</string>
+    <string name="category">Categories</string>
+    <string name="about_me">About me</string>
 </resources>

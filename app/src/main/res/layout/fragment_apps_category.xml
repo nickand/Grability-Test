@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/containerProgressIndicator"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.crystal.crystalpreloaders.widgets.CrystalPreloader
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:crs_pl_style="ball_scale"
-            app:crs_pl_size="small"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/containerNoInternetMessage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_tyran_img"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="22sp"
-            android:text="@string/you_are_offline"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list"
+        <LinearLayout
+            android:id="@+id/containerProgressIndicator"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"
-            android:paddingLeft="10dp"
-            tools:listitem="@layout/apps_item_list"
-            android:background="@color/white"
-            tools:context=".activities.MainActivity"/>
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@mipmap/ic_view_list_white_24dp"
-        app:backgroundTint="@color/blue"/>
+            <com.crystal.crystalpreloaders.widgets.CrystalPreloader
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:crs_pl_bg_color="@color/bg_green"
+                app:crs_pl_fg_color="@color/colorAccent"
+                app:crs_pl_size="small"
+                app:crs_pl_style="ball_scale" />
 
-</android.support.design.widget.CoordinatorLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/containerNoInternetMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_tyran_img" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/you_are_offline"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/posts_lists_reddit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:paddingLeft="10dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:context=".activities.MainActivity"
+                tools:listitem="@layout/apps_item_list" />
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@mipmap/ic_view_list_white_24dp"
+            app:backgroundTint="@color/bg_green" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
